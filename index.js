@@ -2,6 +2,7 @@ const {Triangle, Circle, Square} = require('./lib/shapes');
 const fs = require('fs');
 const inquirer = require('inquirer');
 const { userInfo } = require('os');
+const input = getUserInput();
 
 //function for user input with requirements requesting it contains min 1 character and a max 3 characters
 
@@ -11,6 +12,7 @@ function getUserInput() {
         userInput = prompt('Please choose a value with 1 to 3 characters:');
     } while (!userInput || userInput.length < 1 || userInput.length > 3);
     return userInput;
+    
 }
 
 //user questions
@@ -34,6 +36,6 @@ const questions = [
 {
     type: 'input',
     name: 'shapeColor',
-    prompt: 'What color would you like the logo shape to be?',
+    prompt: 'Please choose a color for the logo shape',
 },
 ];
