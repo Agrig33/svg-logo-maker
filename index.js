@@ -35,3 +35,36 @@ const questions = [
 },
 ];
 return userInput;  
+
+//function to generate logo
+function createSVG(shape, shapeColor) {
+    let logoShape;
+    switch (shape) {
+        case 'Triangle':
+            logoShape = Triangle(shapeColor);
+            break;
+        case 'Circle':
+            logoShape = Circle(shapeColor);
+            break;
+        case 'Square':
+            logoShape = Square(shapeColor);
+            break;
+        default:
+            throw new Error('Shape not available. Please select another shape.');
+    }
+    return logoShape;
+}
+
+async function createSVG() {
+    try {
+        const { shape, shapeColor } = await getUserInput();
+        const logoInfo = shapes[shape](shapeColor);
+
+fs.writeFile('output.svg', logoInfo);
+    console.log('Logo created successfully!');
+} catch (error) {
+    console.log('There was an error creating logo', error);
+}
+}
+
+createSVG();
