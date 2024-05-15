@@ -9,10 +9,12 @@ function getUserInput() {
     let userInput;
     do {
         userInput = prompt('Please choose a value with 1 to 3 characters:');
-    if (!userInput === null || userInput.length < 1 || userInput.length > 3) {
-        alert('Please try again. Characters must be at least 1-3 characters in length.');
+    if (userInput === null) {
+       return null;
+    } else if (userInput.length < 1 || userInput.length > 3) {
+        alert('Invalid entry. Characters must be at least 1-3 characters in length. Please try again');
         }
-    } while (userInput === null || userInput.length < 1 || userInput.length > 3);   
+    } while (userInput.length <1 || userInput.length > 3);
 }
 
 //user questions
