@@ -1,55 +1,58 @@
-const {Triangle, Circle, Square} = require('./lib/shapes');
 const fs = require('fs');
 const inquirer = require('inquirer');
-const input = getUserInput();
+const { Triangle, Circle, Square } = require('./lib/shapes');
 
-//function for user input with requirements requesting it contains min 1 character and a max 3 characters
 
-function getUserInput() {
-    let userInput;
-    do {
-        userInput = prompt('Please choose a value with 1 to 3 characters:');
-    if (userInput === null) {
-       return null;
-    } else if (userInput.length < 1 || userInput.length > 3) {
-        alert('Invalid entry. Characters must be at least 1-3 characters in length. Please try again');
-        }
-    } while (userInput.length <1 || userInput.length > 3);
-}
 
 //user questions
 const questions = [ 
+    {
+        type: "input",
+        name: "text",
+        message: "what 3 characters would you like to enter?",
+        validate: (answer) => {
+            if (answer.length <1 || answer.length > 3) {
+                console.log('\n \Invalid entry! Characters must be 1-3 characters in length. Please try again.');
+                return false;
+            }
+            return true;
+
+            }
+    },
 {
     type: 'input',
     name: 'textColor',
-    prompt: 'What color would you like the text to be?',
+    message: 'What color would you like the text to be?',
 },
 {
     type: 'list',
     name: 'shape',
-    prompt: 'Please choose a shape from these available options',
-    options: ['Trianle', 'Circle', 'Square'],
+    message: 'Please choose a shape from these available options:',
+    choices: ['Triangle', 'Circle', 'Square'],
 },
 {
     type: 'input',
     name: 'shapeColor',
-    prompt: 'Please choose a color for the logo shape',
-},
+    message: 'Please choose a color for the logo shape.',
+    }
 ];
-return userInput;  
+
+async function getUserInput() {
+    return await inquirer.prompt(questions);
+}
 
 //function to generate logo
-function createSVG(shape, shapeColor) {
+function createSVG(userInput) {
     let logoShape;
-    switch (shape) {
+    switch (userInput.shape) {
         case 'Triangle':
-            logoShape = Triangle(shapeColor);
+            logoShape = new Triangle(userInput.shapeColor);
             break;
         case 'Circle':
-            logoShape = Circle(shapeColor);
+            logoShape = new Circle(userInput.shapeColor);
             break;
         case 'Square':
-            logoShape = Square(shapeColor);
+            logoShape = new Square(userInput.shapeColor);
             break;
         default:
             throw new Error('Shape not available. Please select another shape.');
@@ -57,16 +60,23 @@ function createSVG(shape, shapeColor) {
     return logoShape;
 }
 
-async function createSVG() {
+async function run() {
     try {
-        const { shape, shapeColor } = await getUserInput();
-        const logoInfo = shapes[shape](shapeColor);
+        const userInput = await getUserInput();
+ 
+        const newLogo = createSVG(userInput);
 
-fs.writeFile('output.svg', logoInfo);
-    console.log('Logo created successfully!');
-} catch (error) {
-    console.log('There was an error creating logo', error);
-}
+        fs.writeFile('logo.svg', newLogo.render(), function (err) {
+            if (err) {
+                console.log('There was an error creating the logo. Please try again.', err);
+            } else {
+                console.log('Logo created successfully!');
+            }
+        });
+    } catch (error) {
+        console.log('An error occurred:', error);
+    }
 }
 
-createSVG();
+
+run();
