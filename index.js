@@ -51,7 +51,7 @@ function createShape(shape, shapeColor) {
 function generateSVGContent({ text, textColor, shape, shapeColor }) {
     const shapeExample = createShape(shape, shapeColor);
 
-    return `<svg height="220" width="300" xmlns="http://www.w3.org/2000/svg">
+    return `<svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
     ${shapeExample.render()}
     <text x="150" y="150" font-size="55" text-anchor="middle" fill="${textColor}">${text}</text>
 </svg>`;
