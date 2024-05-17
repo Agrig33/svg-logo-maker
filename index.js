@@ -7,9 +7,9 @@ const { Triangle, Circle, Square } = require('./lib/shapes');
 //user questions
 const questions = [ 
     {
-        type: "input",
-        name: "text",
-        message: "what 3 characters would you like to enter?",
+        type: 'input',
+        name: 'text',
+        message: 'what 3 characters would you like to enter?',
         validate: (answer) => {
             if (answer.length <1 || answer.length > 3) {
                 console.log('\n \Invalid entry! Characters must be 1-3 characters in length. Please try again.');
