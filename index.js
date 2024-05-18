@@ -53,7 +53,7 @@ function generateSVGContent({ text, textColor, shape, shapeColor }) {
 
     return `<svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
     ${shapeExample.render()}
-    <text x="150" y="150" font-size="55" text-anchor="middle" fill="${textColor}">${text}</text>
+    <text x="100" y="120" font-size="50" text-anchor="start" fill="${textColor}">${text}</text>
 </svg>`;
 }
 
