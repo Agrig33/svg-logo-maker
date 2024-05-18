@@ -19,11 +19,13 @@
     "SVG"
   ],
   "author": "Airin Grigorian",
-  "license": "ISC"
-},
-"dependencies": {
-  "inquirer": "^8.2.4"
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.4"
 },
 "devDependencies": {
   "jest": "^29.7.0"
+
+}
+
 }
