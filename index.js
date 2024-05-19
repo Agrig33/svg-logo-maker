@@ -50,10 +50,11 @@ function createShape(shape, shapeColor) {
 
 function generateSVGContent({ text, textColor, shape, shapeColor }) {
     const shapeExample = createShape(shape, shapeColor);
+    const { x, y} = shapeExample.getTextCoordinates();
 
     return `<svg height="200" width="300" xmlns="http://www.w3.org/2000/svg">
     ${shapeExample.render()}
-    <text x="100" y="120" font-size="50" text-anchor="start" fill="${textColor}">${text}</text>
+    <text x="${x}" y="${y}" font-size="55" text-anchor="middle" fill="${textColor}">${text}</text>
 </svg>`;
 }
 
@@ -62,11 +63,11 @@ async function run() {
         const userInput = await inquirer.prompt(questions);
         const svgContent = generateSVGContent(userInput);
 
-        fs.writeFile('logo.svg', svgContent, (err) => {
+        fs.writeFile('logo.svg', svgContent.trim(), (err) => {
             if (err) {
                 console.log('There was an error creating the logo, Please try again.' , err);
             } else {
-                console.log(' Congratulations, Logo created successfully!');
+                console.log('Congratulations, Logo created successfully!');
             }
         });
     } catch (error) {
