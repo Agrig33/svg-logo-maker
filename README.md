@@ -25,7 +25,7 @@ A command-line application that uses user input, in order to generate a logo, an
   2. Answer questions required to generate logo and save as an SVG file.
 
 ## Video Tutorial
-
+[See Demo](https://drive.google.com/file/d/1tNu_n5PLaI0VLt6zl23oPoDHrd219f3k/view)
 
 
 ## Contributions
